@@ -1,0 +1,57 @@
+<html>
+<section id = "mySection">
+	<div class = "container">
+		<video autoplay muted loop id="myVideo">
+			<source src="fitness.mp4" type="video/mp4">
+		</video>
+		<img src = "logo.png" id="myImage" text-align ='center'></img>
+	</div>
+</section>
+
+<section id = "yourSection">
+<body style="background-color: #000000">
+	<br></br>
+	<form action="/action_page.php">
+    <font face="verdana" color="white" font-size:48px >Contact Us</font><br>
+    <br></br>
+    <font color="white"> Email:</font> <input id="myInput" type="text" name="firstname"><br>
+    <br></br>
+    <input id="submit" type="submit">
+  </form>
+</body>
+</section>
+<style>
+/* Style the video: 100% width and height to cover the entire window */
+#mySection {
+    min-height: 1100px;
+    background: url('logo.png') no-repeat;
+    text-align: center;
+}
+
+#myImage {
+	position: absolute;
+	z-index: 3;
+}
+#myVideo {
+    position: absolute;
+    right: 0;
+    min-width: 100%; 
+    z-index: 2;
+}
+
+#yourSection {
+	min-height: 200px;
+    text-align: center;
+    background-color: #000000;
+}
+
+#myInput {
+	width: 30%;
+}
+
+#myImage {
+	position: absolute;
+	bottom: 0;
+}
+</style>
+</html>
