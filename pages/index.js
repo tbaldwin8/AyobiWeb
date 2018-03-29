@@ -3,8 +3,8 @@ import Link from 'next/link/';
 
 const videoStyle = {position: 'absolute',
     right: 0,
-    min-width: 100%,
-    z-index: 2};
+    minWidth: "100%",
+    zIndex: 2};
     
 const footerStyle = {position: "fixed",
   bottom: 0,
