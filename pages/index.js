@@ -1,6 +1,11 @@
 import Template from './_template.js';
 import Link from 'next/link/';
 
+const videoStyle = {position: 'absolute',
+    right: 0,
+    min-width: 100%,
+    z-index: 2};
+    
 const footerStyle = {position: "fixed",
   bottom: 0,
   left: 0,
@@ -21,6 +26,7 @@ const centeredStyle = {position: 'absolute',
 export default () => <Template>
 
 <img style={centeredStyle} src="https://lh3.googleusercontent.com/_PmKhiJF_lVuZNj9kyM8TL-BXhKmYuwm2jgm6QjjwkhKMnnQLbuHVbjKr1LtXOPf6fYe7PjNbnXAbxsrD3FJO7Hu41p7rzFwmmkCN48HlDzon3OEeCA9NbkcPoOKLjYMlSmTAQpNlAS31QOYmw"/>
+<video autoplay muted loop style={videoStyle} src="/static/ant_path_2.mp4" type="video/mp4"/>
 
 <footer style={footerStyle}>
 <Link href="/contact"><a style={linkStyle}>Contact Us</a></Link>
