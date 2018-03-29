@@ -21,7 +21,7 @@ const centeredStyle = {position: 'absolute',
 export default () => <Template>
 
 <img style={centeredStyle} src="https://lh3.googleusercontent.com/_PmKhiJF_lVuZNj9kyM8TL-BXhKmYuwm2jgm6QjjwkhKMnnQLbuHVbjKr1LtXOPf6fYe7PjNbnXAbxsrD3FJO7Hu41p7rzFwmmkCN48HlDzon3OEeCA9NbkcPoOKLjYMlSmTAQpNlAS31QOYmw"/>
-
+<video autoplay muted loop id="myVideo" src="fitness.mp4" type="video/mp4"/>
 <footer style={footerStyle}>
 <Link href="/contact"><a style={linkStyle}>Contact Us</a></Link>
 </footer>
