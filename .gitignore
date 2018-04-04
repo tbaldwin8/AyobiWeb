@@ -1,2 +1,7 @@
+*.swp
 node_modules
+__pycache__
+bin
 .next
+include
+lib
