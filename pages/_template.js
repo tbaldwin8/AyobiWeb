@@ -17,6 +17,8 @@ class Page extends React.Component {
         <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css"/>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
+        
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet"/>
         </Head>
         <div style={{fontFamily: 'Noto Sans, sans-serif', margin: 0, padding: 0}}>
         {this.props.children}
