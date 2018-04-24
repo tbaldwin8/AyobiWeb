@@ -59,7 +59,7 @@ class Index extends React.Component {
           </a>
           <div className="container">
             <div className="container" id="words">
-              <h1 style={{color: 'white'}}> Fitness is a Journey. Let's work together to find the best path to our fitness.</h1>
+              <h1 style={{color: 'white'}}> Fitness is a Journey. Let's navigate it together.</h1>
               {/*<h3 style="line-height:1.5;"> Ayobi is your guide for the most difficult journey in life: fitness. Losing weight, gaining muscle, looking good, feeling great, or simply just staying fit, whatever your destination is, there is someone else who has already found a way to get there. Ayobi harnesses the power of the community to get you from any Point A to any Point B in fitness as quickly, effectively, and enjoyably as possible. </h3>*/}
             </div>
             {/* <p class="lead">
