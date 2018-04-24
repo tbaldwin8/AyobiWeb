@@ -55,11 +55,11 @@ class Index extends React.Component {
         <nav className="navbar navbar-expand-lg" style={{backgroundColor: 'transparent'}}/>
           <a className="navbar-brand" href="#" id="header" style={{backgroundColor: 'transparent'}}>
             {/*<img src="/assets/logo1.png">*/}
-            <h1 style={{color: '#e3e3e3', fontSize: 48, marginLeft:'1vw'}}>AYOBI</h1>
+            <h1 style={{color: '#222222', fontSize: 48, marginLeft:'1vw'}}>AYOBI</h1>
           </a>
           <div className="container">
             <div className="container" id="words">
-              <h1 style={{color: 'white'}}> Fitness is a Journey. Let's navigate it together.</h1>
+              <h1 style={{color: '#222222'}}> Fitness is a Journey. Let's navigate it together.</h1>
               {/*<h3 style="line-height:1.5;"> Ayobi is your guide for the most difficult journey in life: fitness. Losing weight, gaining muscle, looking good, feeling great, or simply just staying fit, whatever your destination is, there is someone else who has already found a way to get there. Ayobi harnesses the power of the community to get you from any Point A to any Point B in fitness as quickly, effectively, and enjoyably as possible. </h3>*/}
             </div>
             {/* <p class="lead">
