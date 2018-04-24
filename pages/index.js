@@ -52,19 +52,14 @@ class Index extends React.Component {
   render() {
     return (
       <Template><div>
-        <title>Ayobi</title>
-        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         <nav className="navbar navbar-expand-lg" style={{backgroundColor: 'transparent'}}/>
           <a className="navbar-brand" href="#" id="header" style={{backgroundColor: 'transparent'}}>
             {/*<img src="/assets/logo1.png">*/}
-            <h1 style={{color: '#333', fontSize: 48}}>AYOBI</h1>
+            <h1 style={{color: '#fff', fontSize: 48, marginLeft:'1vw'}}>AYOBI</h1>
           </a>
           <div className="container">
             <div className="container" id="words">
-              <h1> Let's work together to find the best route to fitness. </h1>
+              <h1 style={{color: 'white'}}> Fitness is a Journey. Let's work together to find the best path to our fitness.</h1>
               {/*<h3 style="line-height:1.5;"> Ayobi is your guide for the most difficult journey in life: fitness. Losing weight, gaining muscle, looking good, feeling great, or simply just staying fit, whatever your destination is, there is someone else who has already found a way to get there. Ayobi harnesses the power of the community to get you from any Point A to any Point B in fitness as quickly, effectively, and enjoyably as possible. </h3>*/}
             </div>
             {/* <p class="lead">
@@ -114,10 +109,10 @@ class Index extends React.Component {
 export default Index;
 /*export default () => <Template>*/
 
-<img style={centeredStyle} src="https://lh3.googleusercontent.com/_PmKhiJF_lVuZNj9kyM8TL-BXhKmYuwm2jgm6QjjwkhKMnnQLbuHVbjKr1LtXOPf6fYe7PjNbnXAbxsrD3FJO7Hu41p7rzFwmmkCN48HlDzon3OEeCA9NbkcPoOKLjYMlSmTAQpNlAS31QOYmw"/>
-<video autoplay muted loop id="myVideo" src="/static/ant_path_2.mp4" type="video/mp4"/>
-<footer style={footerStyle}>
-<Link href="/contact"><a style={linkStyle}>Contact Us</a></Link>
-</footer>
-</Template>
+// <img style={centeredStyle} src="https://lh3.googleusercontent.com/_PmKhiJF_lVuZNj9kyM8TL-BXhKmYuwm2jgm6QjjwkhKMnnQLbuHVbjKr1LtXOPf6fYe7PjNbnXAbxsrD3FJO7Hu41p7rzFwmmkCN48HlDzon3OEeCA9NbkcPoOKLjYMlSmTAQpNlAS31QOYmw"/>
+// <video autoplay muted loop id="myVideo" src="/static/ant_path_2.mp4" type="video/mp4"/>
+// <footer style={footerStyle}>
+// <Link href="/contact"><a style={linkStyle}>Contact Us</a></Link>
+// </footer>
+// </Template>
 

@@ -6,7 +6,7 @@ class Page extends React.Component {
         <div>
         <Head>
         <title>Ayobi</title>
-        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta httpEquiv="x-ua-compatible" content="ie=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800"/>
