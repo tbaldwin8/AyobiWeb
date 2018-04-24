@@ -55,7 +55,7 @@ class Index extends React.Component {
         <nav className="navbar navbar-expand-lg" style={{backgroundColor: 'transparent'}}/>
           <a className="navbar-brand" href="#" id="header" style={{backgroundColor: 'transparent'}}>
             {/*<img src="/assets/logo1.png">*/}
-            <h1 style={{color: '#fff', fontSize: 48, marginLeft:'1vw'}}>AYOBI</h1>
+            <h1 style={{color: '#e3e3e3', fontSize: 48, marginLeft:'1vw'}}>AYOBI</h1>
           </a>
           <div className="container">
             <div className="container" id="words">
