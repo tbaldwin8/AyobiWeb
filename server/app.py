@@ -1,6 +1,7 @@
 ####### IMPORTS #########
 import os
 import secrets
+import PIL
 from PIL import Image
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
