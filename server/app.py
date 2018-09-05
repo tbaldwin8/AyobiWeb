@@ -30,8 +30,6 @@ login_manager.login_view = 'login'
 def load_user(user_id):
 	return User.query.get(int(user_id))
 
-from manage import db, app
-
 ####### DATABASE MODELS #########
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
