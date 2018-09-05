@@ -5,6 +5,7 @@ import PIL
 from PIL import Image
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.postgresql import JSON
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
@@ -13,7 +14,6 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-## from config import Config, ProductionConfig, StagingConfig, DevelopmentConfig, TestingConfig
 
 ####### CONFIGURATION #########
 app = Flask(__name__, static_folder="../static",
@@ -24,6 +24,7 @@ print(os.environ['APP_SETTINGS'])
 
 ##['SECRET_KEY'] = 'ecaf1e9644f3e53c6bfe13704717c3a0'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kvafwqaqajqoms:630ae8e2e1373439b3d36fdfa7303d6dfabaee9f719bfc6d1a48ed4ab72e4dc0@ec2-50-17-194-186.compute-1.amazonaws.com:5432/d2uhitiiomkisl' 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 ## 'sqlite:////Users/toddbaldwin/Documents/AyobiFiles/AyobiWeb/server/users.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
