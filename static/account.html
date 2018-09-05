@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ayobi Fitness</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,300i,400,400i,600,900i" rel="stylesheet" type='text/css'>
+
+<!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/clean-blog.min.css') }}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}">Ayobi Fitness</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('addpost') }}">New Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('my_posts') }}">My Posts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{{ url_for('static', filename='images/fitness2.jpg') }}'); height: 450px;">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading" style="padding-top: 100px">
+              <div class="media">
+                  <div style="float: left; width: '60'; height: '60'">
+                    <img class="rounded-circle account-img" src="{{ url_for('static', filename='images/prof_pics/' + current_user.image_file) }}" width="200" height="200">
+                  </div>
+                  <div class="media-body" style="float:right; margin-left: 20px;">
+                    <br><br>
+                    <h1 class="account-heading"> {{ current_user.username }}</h1><h1 style="font-size: 30px; font-weight: lighter;">{{ current_user.age }}|{{ current_user.gender }}</h1>
+                  </div>
+                </div><br>
+              <h1>Hi, {{ current_user.first_name }}.</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto" style="background-image: linear-gradient(225deg, #1F34A9 0%, #4A64D3 53%, #0CA35D 100%); border-radius: 25px; padding-top: 25px; padding-bottom: 25px; color:#fff">
+           <!-- <div class="content-section">
+              <div class="media">
+                <div style="float: left;">
+                  <img class="rounded-circle account-img" src='{{ image_file }}' width="100" height="100">
+                </div>
+                <div class="media-body" style="float: right; margin-left: 15px;">
+                  <h2 class="account-heading"> {{ current_user.username }}</h2>
+                  <h2 style="font-size: 16px; font-weight: lighter;"> {{ current_user.email }} </h2>
+                </div>
+              </div>
+              <br>
+            </div>-->
+            <div>
+              <form name="addForm" id="addForm" method="POST" action="" enctype="multipart/form-data" novalidate>
+                {{ form.hidden_tag() }}
+                <legend>Update Account Information</legend>
+                <div class="form-group">
+                  {{ form.first_name.label }}
+                  {% if form.first_name.errors %}
+                    {{ form.first_name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.first_name.errors %}
+                        <span> {{ error }}</span>
+                      {% endfor %}
+                  {% else %}
+                    {{ form.first_name(class="form-control form-control-lg", style="color:#fff") }}
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                  {{ form.last_name.label }}
+                  {% if form.last_name.errors %}
+                    {{ form.last_name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.last_name.errors %}
+                        <span> {{ error }}</span>
+                      {% endfor %}
+                  {% else %}
+                    {{ form.last_name(class="form-control form-control-lg", style="color:#fff") }}
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                  {{ form.username.label }}
+                  {% if form.username.errors %}
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.username.errors %}
+                        <span> {{ error }}</span>
+                      {% endfor %}
+                  {% else %}
+                    {{ form.username(class="form-control form-control-lg", style="color:#fff") }}
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                  {{ form.email.label }}
+                  {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.email.errors %}
+                        <span> {{ error }}</span>
+                      {% endfor %}
+                  {% else %}
+                    {{ form.email(class="form-control form-control-lg", style="color:#fff") }}
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                  {{ form.picture.label() }}
+                  {{ form.picture(class="form-control-file") }}
+                  {% if form.picture.errors %}
+                    {{ form.picture(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.picture.errors %}
+                        <span class="text-danger"> {{ error }}</span><br>
+                      {% endfor %}
+
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                  {{ form.bio.label }}
+                  {% if form.bio.errors %}
+                    {{ form.bio(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.bio.errors %}
+                        <span> {{ error }}</span>
+                      {% endfor %}
+                  {% else %}
+                    {{ form.bio(class="form-control form-control-lg", style="color:#fff") }}
+                  {% endif %}
+                </div>
+                <br>
+                <div id="success"></div>
+                <div class="form-group">
+                  {{ form.submit(class="btn btn-outline-success", style="border-radius: 25px") }}
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://www.instagram.com/ayobifitness/">
+                  <span class="fa-stack fa-lg">
+                    <img src="{{ url_for('static', filename='images/instagram.png')}}" width="40" height="40">
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://twitter.com/AyobiFitness">
+                  <span class="fa-stack fa-lg">
+                    <img src="{{ url_for('static', filename='images/twitter.png')}}" width="40" height="40">
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/ayobifitness/">
+                  <span class="fa-stack fa-lg">
+                    <img src="{{ url_for('static', filename='images/facebook.png')}}" width="40" height="40">
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Ayobi Fitness 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{{ url_for('static', filename='js/clean-blog.min.js') }}"></script>
+
+  </body>
+
+</html>

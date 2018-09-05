@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ayobi Fitness</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,300i,400,400i,600,900i" rel="stylesheet" type='text/css'>
+
+<!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/clean-blog.css') }}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}" style="color:#fff">Ayobi Fitness</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            {% if current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('addpost') }}">New Post</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('my_posts') }}">My Posts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('account') }}">{{ current_user.username }}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{{ url_for('static', filename='images/fitness3.jpg') }}')">
+      <div class="overlay"></div>
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+                <div class="media">
+                  <div style="float: left; width: '60'; height: '60'">
+                    <img class="rounded-circle account-img" src="{{ url_for('static', filename='images/prof_pics/' + post.author.image_file) }}" width="200" height="200">
+                  </div>
+                  <div class="media-body" style="float:right; margin-left: 20px;">
+                    <br><br>
+                    <h1 class="account-heading"> {{ post.author.username }}</h1><h1 style="font-size: 30px; font-weight: lighter;">{{ post.author.age }}|{{ post.author.gender }}</h1>
+                  </div>
+                </div>
+                  <h2 class="post-header" style="color:#fff, font-size: 200px">
+                    <br>{{ post.date_posted.strftime('%B %d, %Y  %-I:%-M %p') }}
+                  </h2>
+              </div>
+            </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto" style="background-image: linear-gradient(225deg, #1F34A9 0%, #4A64D3 53%, #0CA35D 100%); border-radius: 25px; padding: 20px; color:#fff;">
+            <div>
+                <img src="{{ url_for('static', filename='images/prog_pics/' + post.prog_pic) }}" style="border-radius: 25px; display: block; margin-right: auto; margin-left: auto" width="700" height="700">
+            </div>
+            <div style="text-transform: uppercase; margin-left: 12px">
+              <p><b>Weight: {{post.weight}} lbs </b></p>
+              <p><b>Body Fat Percentage: {{post.bodyfat}}%</b></p>
+              <p><b>Resting Heart Rate: {{post.rhr}} bpm</b></p>
+            </div>
+            <div style="margin-left: 12px">
+            <p><b style="text-transform: uppercase">Workout: </b><br>{{post.workout|safe}}</p>
+            <p><b style="text-transform: uppercase"> Since my last post: </b><br>{{post.note|safe}}</p>
+            {% if current_user.id == post.author.id %}
+              <a class="btn btn-outline-success" href="{{ url_for('update_post', post_id=post.id) }}" style="border-radius:25px;">Update Post</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <hr>
+    
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://www.instagram.com/ayobifitness/">
+                  <span class="fa-stack fa-lg">
+                    <img src="{{ url_for('static', filename='images/instagram.png')}}" width="40" height="40">
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://twitter.com/AyobiFitness">
+                  <span class="fa-stack fa-lg">
+                    <img src="{{ url_for('static', filename='images/twitter.png')}}" width="40" height="40">
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/ayobifitness/">
+                  <span class="fa-stack fa-lg">
+                    <img src="{{ url_for('static', filename='images/facebook.png')}}" width="40" height="40">
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Ayobi Fitness 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{{ url_for('static', filename='js/clean-blog.min.js') }}"></script>
+
+  </body>
+
+</html>
