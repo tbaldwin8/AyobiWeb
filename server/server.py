@@ -185,7 +185,10 @@ def save_prof_picture(form_picture):
 ####### ROUTES #########
 
 @app.route("/")
-@app.route("/home")
+def launch():
+	return render_template("index.html")
+
+@app.route("/demo")
 def home():
 	posts = Fitpost.query.filter_by(public=True).order_by(Fitpost.date_posted.desc()).all()
 

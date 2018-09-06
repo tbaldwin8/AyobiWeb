@@ -65,7 +65,9 @@ p {
   position: relative;
   padding: 0 5%;
   margin: 0 auto 0;
-  max-width: 600px; }
+  max-width: 600px;
+  height: 100%;
+}
 
 .block-header {
   margin-top: 60px; }
