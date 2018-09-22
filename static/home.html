@@ -99,15 +99,16 @@
                   <img class="rounded-circle account-img" src="{{ url_for('static', filename='images/prof_pics/' + post.author.image_file) }}" width="60" height="60">
                 </div>
                 <div class="media-body" style="float:right; margin-left: 8px;">
-                  <a class="account-heading" href="{{ url_for('post', post_id=post.id) }}"> {{ post.author.username }}</a><br>{{ post.author.age }}|{{ post.author.gender }}
+                  <a class="account-heading" href="{{ url_for('my_posts') }}"> {{ post.author.username }}</a><br>{{ post.author.age }}|{{ post.author.gender }}
                   <div style="float:right" width="75" height="75">
-                      <img src="{{ url_for('static', filename='images/prog_pics/' + post.prog_pic) }}" width="125" height="125">
+                      <img src="{{ url_for('static', filename='images/prog_pics/' + post.prog_pic) }}" width="125" height="125" style="border-radius: 20px">
                   </div>
                   <h3>
                   <br>
-                    <a class="post-subtitle" style="color:#fff" href="{{ url_for('post', post_id=post.id) }}">
-                      {{ post.date_posted.strftime('%B %d, %Y  %-I:%-M %p') }}
+                    <a class="post-subtitle" style="color:#fff; font-size: 1.2rem" href="{{ url_for('post', post_id=post.id) }}">
+                          Posted: {{ post.date_posted.strftime('%B %d, %Y  %-I:%-M %p') }} UTC
                     </a>
+                    <!--<p class="post-meta">Posted by Todd on {{ post.date_posted.strftime('%B %d, %Y  %-I:%-M %p') }}</p>-->
                   </h3>
                 </div>
               </div>

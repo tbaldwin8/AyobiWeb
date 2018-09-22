@@ -12,7 +12,7 @@ from flask_login import LoginManager, UserMixin, login_user, current_user, logou
 from datetime import datetime
 from flask_wtf import FlaskForm 
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 ####### CONFIGURATION #########
@@ -45,6 +45,8 @@ class User(db.Model, UserMixin):
 	first_name = db.Column(db.String(120), nullable=False)
 	last_name = db.Column(db.String(120), nullable=False)
 	age = db.Column(db.Integer, nullable=False)
+	bday = db.Column(db.Date, nullable= False)
+	jday = db.Column(db.Date, nullable= False)
 	gender = db.Column(db.String(20), nullable=False)
 	image_file = db.Column(db.String(20), unique=True, nullable=False, default='defaultaccount.jpg')
 	bio = db.Column(db.Text)
@@ -66,7 +68,13 @@ class Fitpost(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 	def __repr__(self):
-		return f"Fitpost('{self.date_posted}')"	
+		return f"Fitpost('{self.date_posted}')"
+
+##class WorkoutPlan(db.Model):
+	##id = db.Column(db.Integer, primary_key=True)
+
+##class Exercise(db.Model):
+	##id = db.Column(db.Integer)
 
 
 ####### FORMS #########
@@ -77,7 +85,7 @@ class RegistrationForm(FlaskForm):
 	confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
 	first_name = StringField('First Name', validators=[DataRequired(), Length(min=1, max=120)])
 	last_name = StringField('Last Name', validators=[DataRequired(), Length(min=1, max=120)])
-	age = IntegerField('Age', validators=[DataRequired()])
+	bday = DateField('Birthday', validators=[DataRequired()])
 	gender = StringField('Gender', validators=[DataRequired()])
 	image_file = FileField('Upload Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
 	bio = TextAreaField('Bio')
@@ -91,7 +99,7 @@ class RegistrationForm(FlaskForm):
 	def validate_email(self, email):
 		user = User.query.filter_by(email=email.data).first()
 		if user:
-			raise ValidationError('That email is taken. Please choose a different email.')
+			raise ValidationError('This email is already associated with an account.')
 
 class LoginForm(FlaskForm):
 	email = StringField('Email', validators=[DataRequired(), Email()])
@@ -182,6 +190,10 @@ def save_prof_picture(form_picture):
 	cropped_img.thumbnail(output_size, Image.ANTIALIAS)
 	cropped_img.save(picture_path)
 	return picture_fn
+
+def calc_age(born):
+    today = date.today()
+    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 ####### ROUTES #########
 
 @app.route("/")
@@ -203,8 +215,9 @@ def register():
 		if form.image_file.data:
 			picture_file = save_prof_picture(form.image_file.data)
 		hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		age = calc_age(form.bday.data)
 		user = User(username=form.username.data, first_name=form.first_name.data, last_name=form.last_name.data, 
-			email=form.email.data, age=form.age.data, gender=form.gender.data, bio=form.bio.data, image_file=picture_file, password=hashed_pw)
+			email=form.email.data, jday=date.now(), bday=form.bday.data, age=age, gender=form.gender.data, bio=form.bio.data, image_file=picture_file, password=hashed_pw)
 		db.session.add(user)
 		db.session.commit()
 		flash('An account has been created for %s! You are now able to log in.' % form.username.data, 'success')
@@ -220,6 +233,7 @@ def login():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			login_user(user, remember=form.remember.data)
+			current_user.age = calc_age(current_user.bday)
 			return redirect(url_for('home'))
 		else:
 			flash('Login Unsuccessful. Please check email and password', 'danger')
