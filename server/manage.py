@@ -6,7 +6,9 @@ from server import app, db
 
 app.config.from_object(os.environ['APP_SETTINGS'])
 
-migrate = Migrate(app, db)
+MIGRATION_DIR = os.path.join('server', 'migrations')
+
+migrate = Migrate(app, db, directory=MIGRATION_DIR)
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
